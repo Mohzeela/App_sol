@@ -21,8 +21,9 @@ spec:
       - name: mysql-vol
         emptyDir: {}
       containers:
-      - image: my-mysql:latest
+      - image: my-mysql:2.0
         name: my-mysql
+        imagePullPolicy: Never
         volumeMounts:
         - name: mysql-vol
           mountPath: /var/lib/mysql
