@@ -1,0 +1,44 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  creationTimestamp: null
+  labels:
+    app: contsolutions
+  name: contsolutions
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: contsolutions
+  strategy: {}
+  template:
+    metadata:
+      creationTimestamp: null
+      labels:
+        app: contsolutions
+    spec:
+      volumes:
+      - name: mysql-vol
+        emptyDir: {}
+      containers:
+      - image: my-mysql:latest
+        name: my-mysql
+        volumeMounts:
+        - name: mysql-vol
+          mountPath: /var/lib/mysql
+        ports: 
+        - containerPort: 3306
+          name: my-mysqlport
+        env:
+        - name: MYSQL_ROOT_PASSWORD
+          valueFrom:
+                secretKeyRef:
+                   name: mysql-secret
+                   key: MYSQL_ROOT_PASSWORD
+        - name: MYSQL_DATABASE
+          valueFrom:
+                secretKeyRef:
+                   name: mysql-secret
+                   key: MYSQL_DATABASE
+        resources: {}
+status: {}
