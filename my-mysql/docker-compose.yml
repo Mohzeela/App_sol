@@ -1,0 +1,27 @@
+version: '3'
+services:
+      titanic-db:
+            image: my-mysql:v1.0.0
+            volumes:
+            - /my-mysql:/var/lib/files
+            ports:
+            - "3600:3600"
+      titanic-api:
+            image: my-api:v1.0.0
+            volumes:
+            - /my-mysql:/var/lib/files
+            ports:
+            - "3600:3600"
+      promtheus:
+            image: prom/prometheus:v2.26.0
+            volumes:
+            - ./prometheus.yml:/etc/prometheus/prometheus.yml
+            ports:
+            - "9000:9000"
+      grafanna:
+            image: grafana/grafana:7.5.2
+            volumes:
+            - ./datasource.yaml:/etc/grafana/provisioning/datasources/datasource.yaml
+            ports:
+            - "3000:3000"
+

@@ -1,5 +1,5 @@
 CREATE TABLE mytable(
-   Survived               INTEGER  NOT NULL PRIMARY KEY
+   Survived               INTEGER  NOT NULL 
   ,Pclass                 INTEGER  NOT NULL
   ,Name                   VARCHAR(81) NOT NULL
   ,Sex                    VARCHAR(6) NOT NULL
