@@ -1,4 +1,5 @@
-CREATE TABLE mytable(
+CREATE TABLE titanic_table(
+
    Survived               INTEGER  NOT NULL 
   ,Pclass                 INTEGER  NOT NULL
   ,Name                   VARCHAR(81) NOT NULL

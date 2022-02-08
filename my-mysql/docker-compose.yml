@@ -1,17 +1,31 @@
 version: '3'
 services:
       titanic-db:
-            image: my-mysql:v1.0.0
+            image: my-mysql:v1.2.0
+            build: .
             volumes:
-            - /my-mysql:/var/lib/files
+            - /my-mysql:/var/lib/mysql
             ports:
             - "3600:3600"
+            restart: always
+            environment:
+                    MYSQL_ROOT_PASSWORD: my_secret
+                    MYSQL_DATABASE: titanic_survivor_data
+                    MYSQL_USER: mysql_user
+                    MYSQL_PASSWORD: user_password  
       titanic-api:
             image: my-api:v1.0.0
-            volumes:
-            - /my-mysql:/var/lib/files
+            build: /api
+            depends_on:
+            - titanic-db
             ports:
-            - "3600:3600"
+            - "4000:4000"
+            restart: always
+            environment:
+                    MYSQL_DB_HOST: titanic-db
+                    MYSQL_DB: titanic_survivor_data
+                    MYSQL_PORT: 3306
+                    MYSQL_USER: mysql_user
       promtheus:
             image: prom/prometheus:v2.26.0
             volumes:
