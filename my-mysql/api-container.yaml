@@ -1,0 +1,27 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  creationTimestamp: null
+  labels:
+    app: titanic-api
+  name: titanic-api
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: titanic-api
+  strategy: {}
+  template:
+    metadata:
+      creationTimestamp: null
+      labels:
+        app: titanic-api
+    spec:
+      volumes:
+      - name: api-vol
+        emptyDir: {}
+      containers:
+      - image: api:2.0      #USE IMAGE NAME AND TAG FROM DOCKER BUILD
+        name: titanic-api-image
+        imagePullPolicy: Never
+

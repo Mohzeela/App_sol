@@ -1,7 +1,7 @@
 version: '3'
 services:
       titanic-db:
-            image: my-mysql:v1.2.0
+            image: my-mysql:v1.5.0
             build: .
             volumes:
             - /my-mysql:/var/lib/mysql
@@ -15,7 +15,7 @@ services:
                     MYSQL_PASSWORD: user_password  
       titanic-api:
             image: my-api:v1.0.0
-            build: /api
+            build: api/
             depends_on:
             - titanic-db
             ports:

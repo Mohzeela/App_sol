@@ -2,6 +2,10 @@ FROM node:17-alpine3.14 as base
 
 WORKDIR /app
 
+COPY ./package.json .
+
+RUN npm install
+
 COPY . .
 
 ENTRYPOINT ["npm", "start"]
@@ -11,4 +15,6 @@ ENTRYPOINT ["npm", "start"]
 
 FROM node:17-alpine3.14
 
-COPY --from=base /app .
+WORKDIR /app
+
+COPY --from=base /app /app
